@@ -27,9 +27,11 @@ class HandleShipMovementAction(InputAction):
             if keys_state[keys.RIGHT]:
                 self._ship.set_vx(VEL)
             if keys_state[keys.DOWN]:
-                self._ship.set_vy(VEL)
+                #self._ship.set_vy(VEL)
+                pass
             if keys_state[keys.UP]:
-                self._ship.set_vy(-VEL)
+                #self._ship.set_vy(-VEL)
+                pass
             
             # If keys in either dirrection are not pressed, set velocity of that direction to 0
             if not keys_state[keys.LEFT] and not keys_state[keys.RIGHT]:
