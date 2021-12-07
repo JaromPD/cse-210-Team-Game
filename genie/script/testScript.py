@@ -1,5 +1,7 @@
 from script import Script
 
+# Not actually run. Would be a good place to test our own actions.
+
 def main():
     script = Script()
     script.add_action("input", "HandleQuitAction")

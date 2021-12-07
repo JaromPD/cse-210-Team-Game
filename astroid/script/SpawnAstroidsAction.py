@@ -4,6 +4,8 @@ from astroid.cast.astroid import Astroid
 import random
 import time
 
+# We will probably make this the objects later.
+
 SPAWN_INTERVAL = 1.5          # seconds
 LARGE_SIZE = (175, 175)
 MEDIUM_SIZE = (100, 100)

@@ -1,6 +1,8 @@
 from genie.script.action import InputAction
 from genie.services import keys
 
+# We will probably make this Zombie rather than Ship.
+
 VEL = 4
 
 class HandleShipMovementAction(InputAction):

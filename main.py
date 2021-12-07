@@ -70,6 +70,7 @@ def main():
     cast = Cast()
 
     # Create the player
+    # We will make this the zombie later.
     ship = Ship(path="astroid/assets/spaceship/spaceship_yellow.png", 
                     width = 70,
                     height = 50,
@@ -86,6 +87,7 @@ def main():
                                     y = W_SIZE[1]/2)
 
     # Give actor(s) to the cast
+    # This will be zombie.
     cast.add_actor("ship", ship)
     cast.add_actor("start_button", start_button)
 
@@ -97,7 +99,9 @@ def main():
 
     # Add actions that must be added to the script when the game starts
     startgame_actions = {"input" : [], "update" : [], "output": []}
+    # This will be zombie movement
     startgame_actions["input"].append(HandleShipMovementAction(2, keyboard_service))
+    #This will spawn objects instead.
     startgame_actions["update"].append(SpawnAstroidsAction(1, W_SIZE))
     script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions))
 
