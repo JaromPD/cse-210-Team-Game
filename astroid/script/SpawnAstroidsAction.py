@@ -4,9 +4,7 @@ from astroid.cast.astroid import Astroid
 import random
 import time
 
-# We will probably make this the objects later.
-
-SPAWN_INTERVAL = 1.5          # seconds
+SPAWN_INTERVAL = 1.0          # seconds
 LARGE_SIZE = (175, 175)
 MEDIUM_SIZE = (100, 100)
 SMALL_SIZE = (40, 40)
@@ -30,7 +28,7 @@ class SpawnAstroidsAction(UpdateAction):
         """
         if type == LARGE:
             vel_x = -1 if x > self._window_size[0] / 2 else 1
-            vel_y = 3
+            vel_y = 0
             return Astroid("astroid/assets/astroids/astroid_large.png",
                             health_bar_y_offset=LARGE_SIZE[1]/2+5,
                             health_bar_height=5,
@@ -38,11 +36,11 @@ class SpawnAstroidsAction(UpdateAction):
                             height = LARGE_SIZE[1],
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            #rotation_vel=1,
+                            rotation_vel=1,
                             points=5, max_hp=5, show_text_health=True)
         elif type == MEDIUM:
             vel_x = -2 if x > self._window_size[0] / 2 else 2
-            vel_y = 6
+            vel_y = 0
             return Astroid("astroid/assets/astroids/astroid_med.png",
                             health_bar_y_offset=MEDIUM_SIZE[1]/2+5,
                             health_bar_height=5,
@@ -50,11 +48,11 @@ class SpawnAstroidsAction(UpdateAction):
                             height = MEDIUM_SIZE[1],
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            #rotation_vel=1,
+                            rotation_vel=1,
                             points=3, max_hp=3, show_text_health=True)
         elif type == SMALL:
-            vel_x = -3 if x > self._window_size[0] / 2 else 3
-            vel_y = 8
+            vel_x = -10 if x > self._window_size[0] / 2 else 3
+            vel_y = 0
             return Astroid("astroid/assets/astroids/astroid_small.png",
                             health_bar_y_offset=SMALL_SIZE[1]/2+5,
                             health_bar_height=5,
@@ -62,7 +60,7 @@ class SpawnAstroidsAction(UpdateAction):
                             height = SMALL_SIZE[1],
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            #rotation_vel=1,
+                            rotation_vel=1,
                             points=1, max_hp=1, show_text_health=True)
 
     def execute(self, actors, actions, clock, callback):
@@ -80,15 +78,15 @@ class SpawnAstroidsAction(UpdateAction):
         
         if time.time() - self._last_spawn >= SPAWN_INTERVAL:
             # Pick a random type of astroid: Small, Medium, Large
-            astroid_type = random.randint(1,3)
+            astroid_type = random.randint(3,3)
 
             # Generate a random position on top of the screen,
             #  limit the spawn range from 1/8 of the screen to 7/8 of the screen
             lower_x_bound = int(self._window_size[0] / 8)
             upper_x_bound = int(self._window_size[0] - lower_x_bound)
 
-            start_pos_x = random.randint(lower_x_bound, upper_x_bound)
-            start_pos_y = 620
+            start_pos_x = 900
+            start_pos_y = 300
 
             # spawn an astroid
             astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)

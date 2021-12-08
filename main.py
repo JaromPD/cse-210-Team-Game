@@ -9,7 +9,10 @@ from genie.script.action import Action
 from astroid.script.HandleOffscreenAction import HandleOffscreenAction
 from astroid.script.HandleStartGameAction import HandleStartGameAction
 
+from astroid.cast.hearts import Heart
 from astroid.cast.ship import Ship
+from astroid.cast.floor import Floor
+from astroid.script.HandleShipHittingFloorAction import HandleShipHittingFloorAction
 from astroid.cast.startGameButton import StartGameButton
 from astroid.script.HandleQuitAction import HandleQuitAction
 from astroid.script.HandleShipMovementAction import HandleShipMovementAction
@@ -19,11 +22,11 @@ from astroid.script.DrawActorsAction import DrawActorsAction
 from astroid.script.UpdateScreenAction import UpdateScreenAction
 
 
-W_SIZE = (1280, 720)
+W_SIZE = (1000, 500)
 START_POSITION = 200, 250
 SHIP_WIDTH = 40
 SHIP_LENGTH = 55
-SCREEN_TITLE = "Zombie Run"
+SCREEN_TITLE = "Asteroids"
 FPS = 120
 
 def get_services():
@@ -31,7 +34,15 @@ def get_services():
         Ask the user whether they want to use pygame or raylib services
     """
     # Initialize all services:
-    service_code = 1
+    service_code = 0
+    valid = False
+    while not valid:
+        service_code = str(input("What service would you like to use? (Input 1 for Pygame or 2 for Raylib): ")).strip()
+        if len(str(service_code)) < 1 or not (int(service_code) == 1 or int(service_code) == 2):
+            print("Incorrect input! Please try again!")
+        else:
+            service_code = int(service_code)
+            valid = True
     
     return {
         "keyboard" : PygameKeyboardService() if service_code == 1 else RaylibKeyboardService(),
@@ -62,12 +73,12 @@ def main():
     cast = Cast()
 
     # Create the player
-    # We will make this the zombie later.
     ship = Ship(path="astroid/assets/spaceship/spaceship_yellow.png", 
                     width = 70,
                     height = 50,
-                    x = W_SIZE[0]/2,
-                    y = W_SIZE[1]/10 * 9,
+                    x = 200,
+                    #y = W_SIZE[1]/10 * 9,
+                    y = 295,
                     # y = mother_ship.get_top_left()[1] - 30,
                     rotation=180)
 
@@ -78,10 +89,29 @@ def main():
                                     x = W_SIZE[0]/2,
                                     y = W_SIZE[1]/2)
 
+    # Create a floor
+    floor = Floor(path="astroid/assets/others/start_button.png",
+                                    width = 1000,
+                                    height = int(W_SIZE[0] / 5.7),
+                                    x = W_SIZE[0]/2,
+                                    y = W_SIZE[1]-int(W_SIZE[0] / 5.7)/2)
+
+        # Create the hearts
+    heart = Heart(path="astroid/assets/spaceship/spaceship_yellow.png", 
+                    width = 50,
+                    height = 50,
+                    x = 700,
+                    #y = W_SIZE[1]/10 * 9,
+                    y = 50,
+                    # y = mother_ship.get_top_left()[1] - 30,
+                    rotation=180)
+
+
     # Give actor(s) to the cast
-    # This will be zombie.
     cast.add_actor("ship", ship)
+    cast.add_actor("heart", heart)
     cast.add_actor("start_button", start_button)
+    cast.add_actor("floor", floor)
 
     # Create all the actions
     script = Script()
@@ -91,14 +121,12 @@ def main():
 
     # Add actions that must be added to the script when the game starts
     startgame_actions = {"input" : [], "update" : [], "output": []}
-    # This will be zombie movement
     startgame_actions["input"].append(HandleShipMovementAction(2, keyboard_service))
-    #This will spawn objects instead.
     startgame_actions["update"].append(SpawnAstroidsAction(1, W_SIZE))
     script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions))
 
-
     # Create update actions
+    script.add_action("update", HandleShipHittingFloorAction(1, W_SIZE))
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
 

@@ -14,8 +14,8 @@ class Astroid(HasLifeActor):
                 vx: float = 0, 
                 vy: float = 0, 
                 
-                #rotation: float = 0, 
-                #rotation_vel: float = 0,
+                rotation: float = 0, 
+                rotation_vel: float = 0,
                 
                 points: int = 0,
                 max_hp: int = 0,
@@ -27,15 +27,15 @@ class Astroid(HasLifeActor):
                         
                         width=width, 
                         height=height, 
-                        #changed starting position of x and y to the bottom left of the screen
-                        x=1280, 
-                        y=600, 
+                        
+                        x=x, 
+                        y=y, 
                         
                         vx=vx, 
-                        vy=0, 
+                        vy=vy, 
                         
-                        #rotation=rotation, 
-                        #rotation_vel=rotation_vel,
+                        rotation=rotation, 
+                        rotation_vel=rotation_vel,
                         max_hp=max_hp,
                         show_text_health=show_text_health)
 

@@ -1,8 +1,6 @@
 from genie.script.action import InputAction
 from genie.services import keys
 
-# We will probably make this Zombie rather than Ship.
-
 VEL = 4
 
 class HandleShipMovementAction(InputAction):
@@ -22,19 +20,17 @@ class HandleShipMovementAction(InputAction):
         if (self._ship != None):
             # Check which keys are pressed and update the ship's velocity accordingly
             keys_state = self._keyboard_service.get_keys_state(keys.LEFT, keys.RIGHT, keys.DOWN, keys.UP)
-            if keys_state[keys.LEFT]:
-                self._ship.set_vx(-VEL)
-            if keys_state[keys.RIGHT]:
-                self._ship.set_vx(VEL)
+            #if keys_state[keys.LEFT]:
+               # self._ship.set_vx(-VEL)
+           #if keys_state[keys.RIGHT]:
+               # self._ship.set_vx(VEL)
             if keys_state[keys.DOWN]:
-                #self._ship.set_vy(VEL)
-                pass
+                self._ship.set_vy(VEL)
             if keys_state[keys.UP]:
-                #self._ship.set_vy(-VEL)
-                pass
+                self._ship.set_vy(-10)
             
             # If keys in either dirrection are not pressed, set velocity of that direction to 0
             if not keys_state[keys.LEFT] and not keys_state[keys.RIGHT]:
                 self._ship.set_vx(0)
             if not keys_state[keys.UP] and not keys_state[keys.DOWN]:
-                self._ship.set_vy(0)
+                self._ship.set_vy(10)

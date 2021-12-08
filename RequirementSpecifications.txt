@@ -1,0 +1,57 @@
+General Requirements:
+- (Done) the player controls a space ship that spawns on the bottom and in the middle of the screen
+- (Done) the player press UP, DOWN, LEFT, RIGHT keys to move the ship
+- (Done) the player's ship cannot move outside of the screen
+- the player press SPACE to shoot bullets
+- (Done) astroids continually spawn from the top
+- There is a mothership on the bottom of the screen that the player tries to protect
+- Several power-ups are spawned randomly when an astroid is destroyed
+- The game is over when the player's ship is destroyed
+- The game is also over when the mothership is destroyed
+
+Ship:
+- Can shoot bullets
+- Destroyed immediately if hit an astroid
+
+Astroids:
+- (Done) At first, astroids spawn every 1.5 seconds
+- There are 3 types of astroids:
+              + Big, medium, small
+              + Big: Has 5 HP, gives player 5 points when destroyed. Movement speed: slow
+              + Medium: Has 3 HP, gives player 3 points when destroyed. Movement speed: average
+              + Small: Has 1 HP, gives player 1 point when destroyed. Movement speed: fast
+- Each astroid has a health bar with width = astroid's width, height = 5px.
+    The health bar only shows on the bottom of the astroid if HP is less than 100%
+
+
+Bullets:
+- A bullet is spawn when player hits SPACE.
+- There is an attack interval of 0.25 seconds between 2 consecutive shots
+- Each bullet deals 1 damage (-1hp) to an astroid
+
+Mothership:
+- Starts out with 50 HP
+- The Mothership has a healthbar that has the same width as itself and height of 20pixels.
+    There is also a text representation of the Mothership's health in the middle of the health bar.
+    The healthbar is located on the bottom of the screen.
+    The healthbar only shows when HP < 100%.
+- If hit by an astroid, takes damage equal to the remaining HP of that astroid
+    (So if it's hit by a full HP Big astroid, it will take 5 damage)
+- Takes 20 seconds to power up a very powerful blast that launches when the player hits ENTER.
+    The blast starts from the center of the motheship, expands outward, and destroys all astroids
+
+
+Power-ups:
+- Double Bullets: gives the ship double bullets every shot
+- Attack Speed Up: Reduces the attack interval by 0.02 seconds
+- Small Metal, Medium Metal, Large Metal : Restores Mothership's hp by 1HP, 3HP, and 5HP respectively
+- Lazer Attack: Instead of shooting bullets, the ship shoots a beam of lazer that deals 1 damage every 0.01 seconds.
+                This ability only last for 10 seconds.
+- Shield: Gives the ship a shield that destroys any astroid that comes in contact with it. Can only withstand 3 astroid collisions.
+            This shield never wears off unless it collides with an astroid.
+
+Score:
+- Score is recorded on the top right of the screen
+
+Cosmetic:
+- objects are displayed on the screen using image instead of boxes
