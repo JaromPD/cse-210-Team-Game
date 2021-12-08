@@ -10,8 +10,10 @@ from astroid.script.HandleOffscreenAction import HandleOffscreenAction
 from astroid.script.HandleStartGameAction import HandleStartGameAction
 
 from astroid.cast.hearts import Heart
+from astroid.cast.playerScore import PlayerScore
 from astroid.cast.ship import Ship
 from astroid.cast.floor import Floor
+from astroid.script.DrawScoreAction import DrawScoreAction
 from astroid.script.HandleShipHittingFloorAction import HandleShipHittingFloorAction
 from astroid.cast.startGameButton import StartGameButton
 from astroid.script.HandleQuitAction import HandleQuitAction
@@ -28,6 +30,7 @@ SHIP_WIDTH = 40
 SHIP_LENGTH = 55
 SCREEN_TITLE = "Asteroids"
 FPS = 120
+INITIAL_NUM_LIVES = 3
 
 def get_services():
     """
@@ -96,20 +99,27 @@ def main():
                                     x = W_SIZE[0]/2,
                                     y = W_SIZE[1]-int(W_SIZE[0] / 5.7)/2)
 
-        # Create the hearts
-    heart = Heart(path="astroid/assets/spaceship/spaceship_yellow.png", 
-                    width = 50,
-                    height = 50,
-                    x = 700,
-                    #y = W_SIZE[1]/10 * 9,
-                    y = 50,
-                    # y = mother_ship.get_top_left()[1] - 30,
-                    rotation=180)
+    # Create the hearts
+    heart_x = 700
+    for _ in range(INITIAL_NUM_LIVES):
+        heart = Heart(path="astroid/assets/spaceship/spaceship_yellow.png", 
+                        width = 50,
+                        height = 50,
+                        x = heart_x,
+                        #y = W_SIZE[1]/10 * 9,
+                        y = 50,
+                        # y = mother_ship.get_top_left()[1] - 30,
+                        rotation=180)
+        heart_x += 75
+        cast.add_actor("hearts", heart)
+    
+    # Create the score
+    score = PlayerScore(path="", score=0 )
 
 
     # Give actor(s) to the cast
     cast.add_actor("ship", ship)
-    cast.add_actor("heart", heart)
+    cast.add_actor("score", score)
     cast.add_actor("start_button", start_button)
     cast.add_actor("floor", floor)
 
@@ -133,6 +143,7 @@ def main():
     # Create output actions
     script.add_action("output", DrawActorsAction(1, screen_service))
     script.add_action("output", UpdateScreenAction(2, screen_service))
+    script.add_action("output", DrawScoreAction(1, screen_service))
 
     # Give the cast and script to the dirrector by calling direct_scene.
     # direct_scene then runs the main game loop:
