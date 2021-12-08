@@ -1,3 +1,4 @@
+from astroid.script.HandleShipAstroidsCollison import HandleShipAstroidsCollision
 from genie.director import Director
 from genie.cast.cast import Cast
 from genie.script.script import Script
@@ -129,6 +130,7 @@ def main():
     script.add_action("update", HandleShipHittingFloorAction(1, W_SIZE))
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
+    script.add_action("update", HandleShipAstroidsCollision(1, physics_service, audio_service))
 
     # Create output actions
     script.add_action("output", DrawActorsAction(1, screen_service))
