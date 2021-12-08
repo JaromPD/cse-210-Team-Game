@@ -97,6 +97,7 @@ def main():
     startgame_actions["update"].append(SpawnAstroidsAction(1, W_SIZE))
     script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions))
 
+
     # Create update actions
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))

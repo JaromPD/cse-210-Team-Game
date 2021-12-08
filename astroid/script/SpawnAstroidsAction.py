@@ -38,7 +38,7 @@ class SpawnAstroidsAction(UpdateAction):
                             height = LARGE_SIZE[1],
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            rotation_vel=1,
+                            #rotation_vel=1,
                             points=5, max_hp=5, show_text_health=True)
         elif type == MEDIUM:
             vel_x = -2 if x > self._window_size[0] / 2 else 2
@@ -50,7 +50,7 @@ class SpawnAstroidsAction(UpdateAction):
                             height = MEDIUM_SIZE[1],
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            rotation_vel=1,
+                            #rotation_vel=1,
                             points=3, max_hp=3, show_text_health=True)
         elif type == SMALL:
             vel_x = -3 if x > self._window_size[0] / 2 else 3
@@ -62,7 +62,7 @@ class SpawnAstroidsAction(UpdateAction):
                             height = SMALL_SIZE[1],
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            rotation_vel=1,
+                            #rotation_vel=1,
                             points=1, max_hp=1, show_text_health=True)
 
     def execute(self, actors, actions, clock, callback):
@@ -88,7 +88,7 @@ class SpawnAstroidsAction(UpdateAction):
             upper_x_bound = int(self._window_size[0] - lower_x_bound)
 
             start_pos_x = random.randint(lower_x_bound, upper_x_bound)
-            start_pos_y = 0
+            start_pos_y = 620
 
             # spawn an astroid
             astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)
