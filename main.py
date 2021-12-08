@@ -1,4 +1,4 @@
-from astroid.script.HandleShipAstroidsCollison import HandleShipAstroidsCollision
+from asteroid.script.HandleShipAstroidsCollison import HandleShipAstroidsCollision
 from genie.director import Director
 from genie.cast.cast import Cast
 from genie.script.script import Script
@@ -7,22 +7,22 @@ from genie.services import *
 from genie.cast.actor import Actor
 from genie.script.action import Action
 
-from astroid.script.HandleOffscreenAction import HandleOffscreenAction
-from astroid.script.HandleStartGameAction import HandleStartGameAction
+from asteroid.script.HandleOffscreenAction import HandleOffscreenAction
+from asteroid.script.HandleStartGameAction import HandleStartGameAction
 
-from astroid.cast.hearts import Heart
-from astroid.cast.playerScore import PlayerScore
-from astroid.cast.ship import Ship
-from astroid.cast.floor import Floor
-from astroid.script.DrawScoreAction import DrawScoreAction
-from astroid.script.HandleShipHittingFloorAction import HandleShipHittingFloorAction
-from astroid.cast.startGameButton import StartGameButton
-from astroid.script.HandleQuitAction import HandleQuitAction
-from astroid.script.HandleShipMovementAction import HandleShipMovementAction
-from astroid.script.MoveActorsAction import MoveActorsAction
-from astroid.script.SpawnAstroidsAction import SpawnAstroidsAction
-from astroid.script.DrawActorsAction import DrawActorsAction
-from astroid.script.UpdateScreenAction import UpdateScreenAction
+from asteroid.cast.hearts import Heart
+from asteroid.cast.playerScore import PlayerScore
+from asteroid.cast.ship import Ship
+from asteroid.cast.floor import Floor
+from asteroid.script.DrawScoreAction import DrawScoreAction
+from asteroid.script.HandleShipHittingFloorAction import HandleShipHittingFloorAction
+from asteroid.cast.startGameButton import StartGameButton
+from asteroid.script.HandleQuitAction import HandleQuitAction
+from asteroid.script.HandleShipMovementAction import HandleShipMovementAction
+from asteroid.script.MoveActorsAction import MoveActorsAction
+from asteroid.script.SpawnAstroidsAction import SpawnAstroidsAction
+from asteroid.script.DrawActorsAction import DrawActorsAction
+from asteroid.script.UpdateScreenAction import UpdateScreenAction
 
 
 W_SIZE = (1000, 500)

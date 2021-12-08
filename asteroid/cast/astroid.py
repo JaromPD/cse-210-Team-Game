@@ -1,4 +1,4 @@
-from astroid.cast.HasLifeActor import HasLifeActor
+from asteroid.cast.HasLifeActor import HasLifeActor
 
 class Astroid(HasLifeActor):
     def __init__(self, path: str,

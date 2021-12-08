@@ -1,5 +1,5 @@
 from genie.script.action import UpdateAction
-from astroid.cast.astroid import Astroid
+from asteroid.cast.astroid import Astroid
 
 import random
 import time

@@ -1,7 +1,7 @@
 from genie.script.action import OutputAction
 from genie.services import colors
 
-from astroid.cast.ship import Ship
+from asteroid.cast.ship import Ship
 
 class DrawActorsAction(OutputAction):
     def __init__(self, priority, screen_service):
