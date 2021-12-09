@@ -80,8 +80,8 @@ def main():
             player_walk.append(f"asteroid/assets/zombie/walk/__Zombie01_Walk_0{i}.png")
 
     ship = AnimatedActor(player_walk,
-                            width =100, 
-                            height=100,
+                            width =70, 
+                            height=75,
                             animation_fps=11,
                             game_fps=60,
                             event_triggered=False,
@@ -102,11 +102,7 @@ def main():
                                     width = 1000,
                                     height = int(W_SIZE[0] / 5.7),
                                     x = W_SIZE[0]/2,
-                                    y = W_SIZE[1]-int(W_SIZE[0] / 5.7)/2)
-
-
-   
-    
+                                    y = W_SIZE[1]-int(W_SIZE[0] / 5.7)/2) 
     
     # Create the score
     score = PlayerScore(path="", score=0 )
@@ -116,7 +112,6 @@ def main():
                                     height=W_SIZE[1],
                                     x = W_SIZE[0]/2,
                                     y = W_SIZE[1]/2)
-
 
     # Give actor(s) to the cast
     cast.add_actor("background_image", background_image)
