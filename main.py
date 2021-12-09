@@ -16,6 +16,7 @@ from asteroid.cast.background import Background
 from asteroid.cast.playerScore import PlayerScore
 from asteroid.cast.ship import Ship
 from asteroid.cast.floor import Floor
+from asteroid.script.PlayBackgroundMusicAction import PlayBackgroundMusicAction
 from asteroid.script.DrawScoreAction import DrawScoreAction
 from asteroid.script.HandleShipHittingFloorAction import HandleShipHittingFloorAction
 from asteroid.cast.startGameButton import StartGameButton
@@ -81,7 +82,7 @@ def main():
 
     ship = AnimatedActor(player_walk,
                             width =70, 
-                            height=75,
+                            height=85,
                             animation_fps=11,
                             game_fps=60,
                             event_triggered=False,
@@ -151,6 +152,7 @@ def main():
     script.add_action("update", HandlePointAccumulation(1,W_SIZE))
 
     # Create output actions
+    script.add_action("output", PlayBackgroundMusicAction(1, "asteroid/assets/sound/background_music.mp3", audio_service))
     script.add_action("output", DrawActorsAction(1, screen_service))
     script.add_action("output", DrawScoreAction(1, screen_service))
     script.add_action("output", UpdateScreenAction(2, screen_service))
