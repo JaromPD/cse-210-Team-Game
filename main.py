@@ -21,6 +21,7 @@ from asteroid.cast.startGameButton import StartGameButton
 from asteroid.script.HandleQuitAction import HandleQuitAction
 from asteroid.script.HandleShipMovementAction import HandleShipMovementAction
 from asteroid.script.MoveActorsAction import MoveActorsAction
+from asteroid.script.HandlePointAccumulation import HandlePointAccumulation
 from asteroid.script.SpawnAstroidsAction import SpawnAstroidsAction
 from asteroid.script.DrawActorsAction import DrawActorsAction
 from asteroid.script.UpdateScreenAction import UpdateScreenAction
@@ -101,17 +102,9 @@ def main():
                                     x = W_SIZE[0]/2,
                                     y = W_SIZE[1]-int(W_SIZE[0] / 5.7)/2)
 
-    # Create the hearts
-    heart_x = 700
-    #for _ in range(INITIAL_NUM_LIVES):
-    heart = Heart(path="asteroid/assets/bullet.png", 
-                        width = 50,
-                        height = 50,
-                        x = heart_x,
-                        y = 50,
-                        rotation=0)
-    #   heart_x += 55
-    cast.add_actor("hearts", heart)
+
+   
+    
     
     # Create the score
     score = PlayerScore(path="", score=0 )
@@ -129,6 +122,17 @@ def main():
     cast.add_actor("score", score)
     cast.add_actor("start_button", start_button)
     cast.add_actor("floor", floor)
+        # Create the hearts
+    heart_x = 700
+    for _ in range(INITIAL_NUM_LIVES):
+        heart = Heart(path="asteroid/assets/tombstone.png", 
+                        width = 100,
+                        height = 100,
+                        x = heart_x,
+                        y = 50,
+                        rotation=0)
+        heart_x += 75
+        cast.add_actor("hearts", heart)
 
     # Create all the actions
     script = Script()
@@ -147,6 +151,7 @@ def main():
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
     script.add_action("update", HandleShipAstroidsCollision(1, physics_service, audio_service))
+    script.add_action("update", HandlePointAccumulation(1,W_SIZE))
 
     # Create output actions
     script.add_action("output", DrawActorsAction(1, screen_service))

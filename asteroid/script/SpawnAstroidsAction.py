@@ -53,14 +53,14 @@ class SpawnAstroidsAction(UpdateAction):
         elif type == SMALL:
             vel_x = -10 if x > self._window_size[0] / 2 else 3
             vel_y = 0
-            return Astroid("asteroid/assets/astroids/astroid_small.png",
+            return Astroid("asteroid/assets/goblin/walk/__Goblin01_Walk_000.png",
                             health_bar_y_offset=SMALL_SIZE[1]/2+5,
                             health_bar_height=5,
-                            width = SMALL_SIZE[0],
-                            height = SMALL_SIZE[1],
+                            width = 150,
+                            height = 150,
                             x = x, y = y,
                             vx = vel_x, vy = vel_y,
-                            rotation_vel=1,
+                            rotation_vel=0,
                             points=1, max_hp=1, show_text_health=True)
 
     def execute(self, actors, actions, clock, callback):
@@ -86,7 +86,7 @@ class SpawnAstroidsAction(UpdateAction):
             upper_x_bound = int(self._window_size[0] - lower_x_bound)
 
             start_pos_x = 990
-            start_pos_y = 400
+            start_pos_y = 410
 
             # spawn an astroid
             astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)

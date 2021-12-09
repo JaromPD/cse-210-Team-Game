@@ -22,4 +22,7 @@ class HandleShipHittingFloorAction(UpdateAction):
             # Don't allow the ship to go into the mothership
             if (self._ship != None and self._ship.get_y() > 400):
                 self._ship.set_y(400)
+            # Push the player back when the try to jump too high
+            if (self._ship != None and self._ship.get_y() < 100):
+                self._ship.set_y(100)          
             
