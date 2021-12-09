@@ -40,7 +40,7 @@ class HandleShipMovementAction(InputAction):
             if keys_state[keys.DOWN]:
                 self._ship.set_vy(VEL)
             if keys_state[keys.UP]:
-                self._ship.set_vy(-10)
+                self._ship.set_vy(-50)
                     
 
 
