@@ -28,14 +28,14 @@ class HandleShipAstroidsCollision(UpdateAction):
                         self._score.penalize(100)
                         actors.remove_actor("ship", self._ship)
                         actors.remove_actor("hearts", heart)
-                        self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 0.1)
-                        self._audio_service.play_sound("asteroid/assets/sound/death.wav", 0.1)
+                        self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 1)
+                        self._audio_service.play_sound("asteroid/assets/sound/death.wav", 1)
                     else:
                         self._score.penalize(100)
                         actors.remove_actor("hearts", heart)
                         actors.remove_actor("astroids", actor)
-                        self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 0.1)
-                        self._audio_service.play_sound("asteroid/assets/sound/pain.wav", 0.1)
+                        self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 1)
+                        self._audio_service.play_sound("asteroid/assets/sound/pain.wav", 1)
                         self._ship = None
                         print(hearts)
                     break

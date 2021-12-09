@@ -31,7 +31,7 @@ W_SIZE = (1000, 500)
 START_POSITION = 200, 250
 SHIP_WIDTH = 40
 SHIP_LENGTH = 55
-SCREEN_TITLE = "Asteroids"
+SCREEN_TITLE = "Zombie Run"
 FPS = 120
 INITIAL_NUM_LIVES = 3
 
@@ -40,15 +40,7 @@ def get_services():
         Ask the user whether they want to use pygame or raylib services
     """
     # Initialize all services:
-    service_code = 0
-    valid = False
-    while not valid:
-        service_code = str(input("What service would you like to use? (Input 1 for Pygame or 2 for Raylib): ")).strip()
-        if len(str(service_code)) < 1 or not (int(service_code) == 1 or int(service_code) == 2):
-            print("Incorrect input! Please try again!")
-        else:
-            service_code = int(service_code)
-            valid = True
+    service_code = 2
     
     return {
         "keyboard" : PygameKeyboardService() if service_code == 1 else RaylibKeyboardService(),

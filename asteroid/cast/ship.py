@@ -6,7 +6,7 @@ class Ship(Actor):
                 height: int = 0, 
                 
                 x: float = 0, 
-                y: float = 0, 
+                y: float = -50, 
                 
                 vx: float = 0, 
                 vy: float = 0, 
