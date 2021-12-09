@@ -29,7 +29,7 @@ class SpawnAstroidsAction(UpdateAction):
         if type == LARGE:
             vel_x = -1 if x > self._window_size[0] / 2 else 1
             vel_y = 0
-            return Astroid("astroid/assets/astroids/astroid_large.png",
+            return Astroid("asteroid/assets/astroids/astroid_large.png",
                             health_bar_y_offset=LARGE_SIZE[1]/2+5,
                             health_bar_height=5,
                             width = LARGE_SIZE[0],
@@ -41,7 +41,7 @@ class SpawnAstroidsAction(UpdateAction):
         elif type == MEDIUM:
             vel_x = -2 if x > self._window_size[0] / 2 else 2
             vel_y = 0
-            return Astroid("astroid/assets/astroids/astroid_med.png",
+            return Astroid("asteroid/assets/astroids/astroid_med.png",
                             health_bar_y_offset=MEDIUM_SIZE[1]/2+5,
                             health_bar_height=5,
                             width = MEDIUM_SIZE[0],
@@ -53,7 +53,7 @@ class SpawnAstroidsAction(UpdateAction):
         elif type == SMALL:
             vel_x = -10 if x > self._window_size[0] / 2 else 3
             vel_y = 0
-            return Astroid("astroid/assets/astroids/astroid_small.png",
+            return Astroid("asteroid/assets/astroids/astroid_small.png",
                             health_bar_y_offset=SMALL_SIZE[1]/2+5,
                             health_bar_height=5,
                             width = SMALL_SIZE[0],
@@ -85,8 +85,8 @@ class SpawnAstroidsAction(UpdateAction):
             lower_x_bound = int(self._window_size[0] / 8)
             upper_x_bound = int(self._window_size[0] - lower_x_bound)
 
-            start_pos_x = 900
-            start_pos_y = 300
+            start_pos_x = 990
+            start_pos_y = 400
 
             # spawn an astroid
             astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)

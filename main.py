@@ -11,6 +11,7 @@ from asteroid.script.HandleOffscreenAction import HandleOffscreenAction
 from asteroid.script.HandleStartGameAction import HandleStartGameAction
 
 from asteroid.cast.hearts import Heart
+from asteroid.cast.background import Background
 from asteroid.cast.playerScore import PlayerScore
 from asteroid.cast.ship import Ship
 from asteroid.cast.floor import Floor
@@ -77,24 +78,24 @@ def main():
     cast = Cast()
 
     # Create the player
-    ship = Ship(path="astroid/assets/spaceship/spaceship_yellow.png", 
-                    width = 70,
-                    height = 50,
+    ship = Ship(path="asteroid/assets/zombie/walk/__Zombie01_Walk_000.png", 
+                    width = 100,
+                    height = 100,
                     x = 200,
                     #y = W_SIZE[1]/10 * 9,
-                    y = 295,
+                    y = 400,
                     # y = mother_ship.get_top_left()[1] - 30,
-                    rotation=180)
+                    rotation=0)
 
     # Start game button
-    start_button = StartGameButton(path="astroid/assets/others/start_button.png",
+    start_button = StartGameButton(path="asteroid/assets/others/start_button.png",
                                     width = 305,
                                     height = 113,
                                     x = W_SIZE[0]/2,
                                     y = W_SIZE[1]/2)
 
     # Create a floor
-    floor = Floor(path="astroid/assets/others/start_button.png",
+    floor = Floor(path=" ",
                                     width = 1000,
                                     height = int(W_SIZE[0] / 5.7),
                                     x = W_SIZE[0]/2,
@@ -102,23 +103,28 @@ def main():
 
     # Create the hearts
     heart_x = 700
-    for _ in range(INITIAL_NUM_LIVES):
-        heart = Heart(path="astroid/assets/spaceship/spaceship_yellow.png", 
+    #for _ in range(INITIAL_NUM_LIVES):
+    heart = Heart(path="asteroid/assets/bullet.png", 
                         width = 50,
                         height = 50,
                         x = heart_x,
-                        #y = W_SIZE[1]/10 * 9,
                         y = 50,
-                        # y = mother_ship.get_top_left()[1] - 30,
-                        rotation=180)
-        heart_x += 75
-        cast.add_actor("hearts", heart)
+                        rotation=0)
+    #   heart_x += 55
+    cast.add_actor("hearts", heart)
     
     # Create the score
     score = PlayerScore(path="", score=0 )
 
+    background_image = Background("asteroid/assets/3_game_background.png", 
+                                    width=W_SIZE[0],
+                                    height=W_SIZE[1],
+                                    x = W_SIZE[0]/2,
+                                    y = W_SIZE[1]/2)
+
 
     # Give actor(s) to the cast
+    cast.add_actor("background_image", background_image)
     cast.add_actor("ship", ship)
     cast.add_actor("score", score)
     cast.add_actor("start_button", start_button)
@@ -144,8 +150,8 @@ def main():
 
     # Create output actions
     script.add_action("output", DrawActorsAction(1, screen_service))
-    script.add_action("output", UpdateScreenAction(2, screen_service))
     script.add_action("output", DrawScoreAction(1, screen_service))
+    script.add_action("output", UpdateScreenAction(2, screen_service))
 
     # Give the cast and script to the dirrector by calling direct_scene.
     # direct_scene then runs the main game loop:

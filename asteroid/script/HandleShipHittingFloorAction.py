@@ -20,6 +20,6 @@ class HandleShipHittingFloorAction(UpdateAction):
             line = self._floor.get_top_left()[1] - self._ship.get_height()/2
 
             # Don't allow the ship to go into the mothership
-            if (self._ship != None and self._ship.get_y() > line):
-                self._ship.set_y(line)
+            if (self._ship != None and self._ship.get_y() > 400):
+                self._ship.set_y(400)
             

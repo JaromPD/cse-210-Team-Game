@@ -25,4 +25,4 @@ class DrawScoreAction(OutputAction):
             #         self._score = actor
             #         break
         if self._score != None:
-            self._screen_service.draw_text("Score: " + str(self._score.get_score()), font_size=48, color=colors.RED, position= (20,20))
+            self._screen_service.draw_text("Score: " + str(self._score.get_score()), font_size=48, color=colors.WHITE, position= (20,20))
