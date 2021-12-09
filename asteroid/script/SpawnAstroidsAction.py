@@ -53,7 +53,7 @@ class SpawnAstroidsAction(UpdateAction):
         elif type == SMALL:
             vel_x = -10 if x > self._window_size[0] / 2 else 3
             vel_y = 0
-            return Astroid("asteroid/assets/goblin/walk/GoblinPriority.png",
+            return Astroid("asteroid/assets/goblin/walk/__Goblin01_Walk_000.png",
                             health_bar_y_offset=SMALL_SIZE[1]/2+5,
                             health_bar_height=5,
                             width = 100,
