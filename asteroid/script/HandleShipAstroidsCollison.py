@@ -13,15 +13,25 @@ class HandleShipAstroidsCollision(UpdateAction):
         """
         # First look for the ship
         self._ship = actors.get_first_actor("ship")
-
+        heart = actors.get_first_actor("hearts")
+        hearts = actors.get_actors("hearts")
         # Only worry about collision if the ship actually exists
         if self._ship != None:
             # Look through all the astroids, see if any collides with ship
             for actor in actors.get_actors("astroids"):
                 if self._physics_service.check_collision(self._ship, actor):
-                    #actors.remove_actor("ship", self._ship)
-                    #actors.remove_actor("astroids", actor)
-                    self._audio_service.play_sound("astroid/assets/sound/explosion-01.wav", 0.1)
-                    self._ship = None
-                    print("Hit!")
+                    if heart == None:
+                        pass
+                    elif len(hearts) == 1:
+                        actors.remove_actor("ship", self._ship)
+                        actors.remove_actor("hearts", heart)
+                        self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 0.1)
+                        self._audio_service.play_sound("asteroid/assets/sound/death.wav", 0.1)
+                    else:
+                        actors.remove_actor("hearts", heart)
+                        actors.remove_actor("astroids", actor)
+                        self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 0.1)
+                        self._audio_service.play_sound("asteroid/assets/sound/pain.wav", 0.1)
+                        self._ship = None
+                        print(hearts)
                     break
