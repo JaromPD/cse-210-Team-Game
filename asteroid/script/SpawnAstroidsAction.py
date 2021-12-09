@@ -5,7 +5,7 @@ from genie.cast.animatedActor import AnimatedActor
 import random
 import time
 
-SPAWN_INTERVAL = 1.0          # seconds
+SPAWN_INTERVAL = 2.0          # seconds
 LARGE_SIZE = (175, 175)
 MEDIUM_SIZE = (100, 100)
 SMALL_SIZE = (40, 40)
@@ -38,7 +38,7 @@ class SpawnAstroidsAction(UpdateAction):
             vel_y = 0
      
         elif type == MEDIUM:
-            vel_x = -2 if x > self._window_size[0] / 2 else 2
+            vel_x = -8 if x > self._window_size[0] / 2 else 2
             vel_y = 0
             return AnimatedActor(self._bats_path,
                             width =100, 
@@ -53,7 +53,7 @@ class SpawnAstroidsAction(UpdateAction):
   
 
         if type == SMALL:
-            vel_x = -5 if x > self._window_size[0] / 2 else 3
+            vel_x = -2 if x > self._window_size[0] / 2 else 3
             vel_y = 0
             return AnimatedActor(self._small_paths,
                             width =100, 
@@ -88,8 +88,13 @@ class SpawnAstroidsAction(UpdateAction):
             lower_x_bound = int(self._window_size[0] / 8)
             upper_x_bound = int(self._window_size[0] - lower_x_bound)
 
-            start_pos_x = 990
-            start_pos_y = 415
+            if astroid_type == 3:
+                start_pos_x = 990
+                start_pos_y = 415
+            elif astroid_type == 2:
+                start_pos_x = 990
+                start_pos_y = 200
+
 
             # spawn an astroid
             astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)
