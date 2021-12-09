@@ -1,5 +1,6 @@
 from genie.script.action import UpdateAction
 from asteroid.cast.astroid import Astroid
+from genie.cast.animatedActor import AnimatedActor
 
 import random
 import time
@@ -20,6 +21,12 @@ class SpawnAstroidsAction(UpdateAction):
         self._last_spawn = 0 # seconds
         self._window_size = window_size
         self._astroid_spawn = False
+        self._small_paths = []
+        for i in range(7):
+            self._small_paths.append(f"asteroid/assets/goblin/walk/__Goblin01_Walk_00{i}.png")
+        self._bats_path = []
+        for i in range(7):
+            self._bats_path.append(f"asteroid/assets/bats/flying/__Bat01_Fly_00{i}.png")
 
     def _create_astroid(self, type: int, x: int, y:int):
         """
@@ -29,39 +36,35 @@ class SpawnAstroidsAction(UpdateAction):
         if type == LARGE:
             vel_x = -1 if x > self._window_size[0] / 2 else 1
             vel_y = 0
-            return Astroid("asteroid/assets/astroids/astroid_large.png",
-                            health_bar_y_offset=LARGE_SIZE[1]/2+5,
-                            health_bar_height=5,
-                            width = LARGE_SIZE[0],
-                            height = LARGE_SIZE[1],
-                            x = x, y = y,
-                            vx = vel_x, vy = vel_y,
-                            rotation_vel=1,
-                            points=5, max_hp=5, show_text_health=True)
+     
         elif type == MEDIUM:
             vel_x = -2 if x > self._window_size[0] / 2 else 2
             vel_y = 0
-            return Astroid("asteroid/assets/astroids/astroid_med.png",
-                            health_bar_y_offset=MEDIUM_SIZE[1]/2+5,
-                            health_bar_height=5,
-                            width = MEDIUM_SIZE[0],
-                            height = MEDIUM_SIZE[1],
-                            x = x, y = y,
-                            vx = vel_x, vy = vel_y,
-                            rotation_vel=1,
-                            points=3, max_hp=3, show_text_health=True)
-        elif type == SMALL:
-            vel_x = -10 if x > self._window_size[0] / 2 else 3
+            return AnimatedActor(self._bats_path,
+                            width =100, 
+                            height=100,
+                            animation_fps=7,
+                            game_fps=60,
+                            event_triggered=False,
+                            x=x, y=y, 
+                            vx=vel_x, vy=vel_y, rotation=0, 
+                            rotation_vel=0, flipped = False
+                            )
+  
+
+        if type == SMALL:
+            vel_x = -5 if x > self._window_size[0] / 2 else 3
             vel_y = 0
-            return Astroid("asteroid/assets/goblin/walk/__Goblin01_Walk_000.png",
-                            health_bar_y_offset=SMALL_SIZE[1]/2+5,
-                            health_bar_height=5,
-                            width = 100,
-                            height = 100,
-                            x = x, y = y,
-                            vx = vel_x, vy = vel_y,
-                            rotation_vel=0,
-                            points=1, max_hp=1, show_text_health=True)
+            return AnimatedActor(self._small_paths,
+                            width =100, 
+                            height=100,
+                            animation_fps=7,
+                            game_fps=60,
+                            event_triggered=False,
+                            x=x, y=y, 
+                            vx=vel_x, vy=vel_y, rotation=0, 
+                            rotation_vel=0, flipped = False
+                            )
 
     def execute(self, actors, actions, clock, callback):
         """
@@ -78,7 +81,7 @@ class SpawnAstroidsAction(UpdateAction):
         
         if time.time() - self._last_spawn >= SPAWN_INTERVAL:
             # Pick a random type of astroid: Small, Medium, Large
-            astroid_type = random.randint(3,3)
+            astroid_type = random.randint(2,3)
 
             # Generate a random position on top of the screen,
             #  limit the spawn range from 1/8 of the screen to 7/8 of the screen
@@ -90,6 +93,7 @@ class SpawnAstroidsAction(UpdateAction):
 
             # spawn an astroid
             astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)
+            #astroid.set_animating(True)
             actors.add_actor("astroids", astroid)
 
             # set last_spawn to current frame

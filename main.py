@@ -4,6 +4,7 @@ from genie.cast.cast import Cast
 from genie.script.script import Script
 from genie.services import *
 
+from genie.cast.animatedActor import AnimatedActor
 from genie.cast.actor import Actor
 from genie.script.action import Action
 
@@ -71,14 +72,23 @@ def main():
     cast = Cast()
 
     # Create the player
-    ship = Ship(path="asteroid/assets/zombie/walk/__Zombie01_Walk_000.png", 
-                    width = 100,
-                    height = 100,
-                    x = 200,
-                    #y = W_SIZE[1]/10 * 9,
-                    y = 400,
-                    # y = mother_ship.get_top_left()[1] - 30,
-                    rotation=0)
+    player_walk = []
+    for i in range(11):
+        if i < 10:
+            player_walk.append(f"asteroid/assets/zombie/walk/__Zombie01_Walk_00{i}.png")
+        else:
+            player_walk.append(f"asteroid/assets/zombie/walk/__Zombie01_Walk_0{i}.png")
+
+    ship = AnimatedActor(player_walk,
+                            width =100, 
+                            height=100,
+                            animation_fps=11,
+                            game_fps=60,
+                            event_triggered=False,
+                            x=200, y=400, 
+                            rotation=0, 
+                            rotation_vel=0, flipped = False
+                            )
 
     # Start game button
     start_button = StartGameButton(path="asteroid/assets/others/start_button.png",
