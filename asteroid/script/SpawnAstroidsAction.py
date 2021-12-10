@@ -54,8 +54,8 @@ class SpawnAstroidsAction(UpdateAction):
             vel_x = -8 if x > self._window_size[0] / 2 else 2
             vel_y = 0
             return AnimatedActor(self._bats_path,
-                            width =100, 
-                            height=100,
+                            width = 80, 
+                            height= 50,
                             animation_fps=7,
                             game_fps=60,
                             event_triggered=False,

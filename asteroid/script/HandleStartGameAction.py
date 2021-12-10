@@ -2,7 +2,7 @@ from genie.script.action import InputAction
 from genie.services import mouse
 
 class HandleStartGameAction(InputAction):
-    def __init__(self, priority, mouse_service, physics_service, actions):
+    def __init__(self, priority, mouse_service, physics_service, actions, audio_service):
         """
             This action adds a bunch of other actions onto the script when
                 the Start Game button is clicked
@@ -14,7 +14,7 @@ class HandleStartGameAction(InputAction):
         self._mouse_service = mouse_service
         self._physics_service = physics_service
         self._actions = actions
-
+        self._audio_service = audio_service
     def execute(self, actors, actions, clock, callback):
         """
             When left mouse is clicked:
@@ -31,6 +31,7 @@ class HandleStartGameAction(InputAction):
             and self._physics_service.check_collision_point(start_button, mouse_pos):
                 actors.remove_actor("start_button", start_button)
                 actions.remove_action("input", self)
+                self._audio_service.play_sound("asteroid/assets/sound/laugh.mp3", 1)
                 for action in self._actions["input"]:
                     actions.add_action("input", action)
                 for action in self._actions["update"]:

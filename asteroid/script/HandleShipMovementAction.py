@@ -4,7 +4,7 @@ from genie.services import keys
 import time
 
 JUMP_INTERVAL = 0.2
-VEL = 4
+VEL = 5
 
 class HandleShipMovementAction(InputAction):
     def __init__(self, priority, keyboard_service):

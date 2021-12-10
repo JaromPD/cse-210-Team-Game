@@ -92,7 +92,7 @@ def main():
                             )
 
     # Start game button
-    start_button = StartGameButton(path="asteroid/assets/others/start_button.png",
+    start_button = StartGameButton(path="asteroid/assets/others/start_button2.png",
                                     width = 305,
                                     height = 113,
                                     x = W_SIZE[0]/2,
@@ -143,7 +143,7 @@ def main():
     startgame_actions["input"].append(HandleShipMovementAction(2, keyboard_service))
     startgame_actions["update"].append(SpawnAstroidsAction(1, W_SIZE))
     startgame_actions["update"].append(HandlePointAccumulation(1, W_SIZE))
-    script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions))
+    script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions, audio_service))
 
     # Create update actions
     script.add_action("update", HandleShipHittingFloorAction(1, W_SIZE))
