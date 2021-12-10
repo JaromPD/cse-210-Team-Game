@@ -142,6 +142,7 @@ def main():
     startgame_actions = {"input" : [], "update" : [], "output": []}
     startgame_actions["input"].append(HandleShipMovementAction(2, keyboard_service))
     startgame_actions["update"].append(SpawnAstroidsAction(1, W_SIZE))
+    startgame_actions["update"].append(HandlePointAccumulation(1, W_SIZE))
     script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions))
 
     # Create update actions
@@ -149,13 +150,14 @@ def main():
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
     script.add_action("update", HandleShipAstroidsCollision(1, physics_service, audio_service))
-    script.add_action("update", HandlePointAccumulation(1,W_SIZE))
+    #script.add_action("update", HandlePointAccumulation(1,W_SIZE))
 
     # Create output actions
     script.add_action("output", PlayBackgroundMusicAction(1, "asteroid/assets/sound/background_music.mp3", audio_service))
     script.add_action("output", DrawActorsAction(1, screen_service))
     script.add_action("output", DrawScoreAction(1, screen_service))
     script.add_action("output", UpdateScreenAction(2, screen_service))
+
 
     # Give the cast and script to the dirrector by calling direct_scene.
     # direct_scene then runs the main game loop:
