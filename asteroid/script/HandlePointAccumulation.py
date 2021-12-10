@@ -20,16 +20,18 @@ class HandlePointAccumulation(UpdateAction):
             - Add the astroid to the cast
             - Record the most recent spawn
         """
-        if not self._timer_started:
-            self._timer_started = True
-            self._last_score = time.time()
-        
-        if time.time() - self._last_score >= SCORE_INTERVAL:
-            # get the score actor
-            self._score = actors.get_first_actor("score")
-
-            # spawn an astroid
-            self._score.add_score(50)
-
-            # set last_spawn to current frame
-            self._last_score = time.time()
+        ship = actors.get_first_actor("ship")
+        if ship != None:
+            if not self._timer_started:
+                self._timer_started = True
+                self._last_score = time.time()
+            
+            if time.time() - self._last_score >= SCORE_INTERVAL:
+                # get the score actor
+                self._score = actors.get_first_actor("score")
+    
+                # spawn an astroid
+                self._score.add_score(50)
+    
+                # set last_spawn to current frame
+                self._last_score = time.time()

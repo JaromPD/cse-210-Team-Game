@@ -27,6 +27,9 @@ class SpawnAstroidsAction(UpdateAction):
         self._bats_path = []
         for i in range(7):
             self._bats_path.append(f"asteroid/assets/bats/flying/__Bat01_Fly_00{i}.png")
+        self._reaper_path = []
+        for i in range(7):
+            self._reaper_path.append(f"asteroid/assets/Reaper/attack/__Grim_Attack_00{i}.png")
 
     def _create_astroid(self, type: int, x: int, y:int):
         """
@@ -34,9 +37,19 @@ class SpawnAstroidsAction(UpdateAction):
             the input "type" and the initial position
         """
         if type == LARGE:
-            vel_x = -1 if x > self._window_size[0] / 2 else 1
+            vel_x = -10 if x > self._window_size[0] / 2 else 1
             vel_y = 0
-     
+            return AnimatedActor(self._reaper_path,
+                            width =100, 
+                            height=100,
+                            animation_fps=7,
+                            game_fps=60,
+                            event_triggered=False,
+                            x=x, y=y, 
+                            vx=vel_x, vy=vel_y, rotation=0, 
+                            rotation_vel=0, flipped = False
+                            )
+
         elif type == MEDIUM:
             vel_x = -8 if x > self._window_size[0] / 2 else 2
             vel_y = 0
@@ -81,7 +94,7 @@ class SpawnAstroidsAction(UpdateAction):
         
         if time.time() - self._last_spawn >= SPAWN_INTERVAL:
             # Pick a random type of astroid: Small, Medium, Large
-            astroid_type = random.randint(2,3)
+            astroid_type = random.randint(1,3)
 
             # Generate a random position on top of the screen,
             #  limit the spawn range from 1/8 of the screen to 7/8 of the screen
@@ -94,6 +107,9 @@ class SpawnAstroidsAction(UpdateAction):
             elif astroid_type == 2:
                 start_pos_x = 990
                 start_pos_y = 200
+            else:
+                start_pos_x = 990
+                start_pos_y = 350
 
 
             # spawn an astroid
