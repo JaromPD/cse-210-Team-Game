@@ -40,19 +40,19 @@ class HandleShipMovementAction(InputAction):
             if keys_state[keys.DOWN]:
                 self._ship.set_vy(VEL)
             if keys_state[keys.UP]:
-                if self._jump_timer < 50:
+                if self._jump_timer < 60:
                     self._jump_timer += 1
-                    self._ship.set_vy(-10)
-                elif self._jump_timer < 100 and self._jump_timer >= 50:
+                    self._ship.set_vy(-8)
+                elif self._jump_timer < 120 and self._jump_timer >= 60:
                     self._jump_timer += 1
-                    self._ship.set_vy(10)
+                    self._ship.set_vy(8)
                 
             if not keys_state[keys.UP]:
                 if self._ship.get_y() < 400:
                     self._jump_timer += 100
                 if self._ship.get_y() >= 400:
                     self._jump_timer = 0
-                self._ship.set_vy(10)
+                self._ship.set_vy(8)
             
             # If keys in either dirrection are not pressed, set velocity of that direction to 0
             if not keys_state[keys.LEFT] and not keys_state[keys.RIGHT]:

@@ -29,7 +29,7 @@ class HandleShipAstroidsCollision(UpdateAction):
                         actors.remove_actor("ship", self._ship)
                         actors.remove_actor("hearts", heart)
                         self._audio_service.play_sound("asteroid/assets/sound/squish.wav", 1)
-                        self._audio_service.play_sound("asteroid/assets/sound/death.wav", 1)
+                        self._audio_service.play_sound("asteroid/assets/sound/death.wav", 3)
                     else:
                         self._score.penalize(100)
                         actors.remove_actor("hearts", heart)
