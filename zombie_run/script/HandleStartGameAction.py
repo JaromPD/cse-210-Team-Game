@@ -31,7 +31,7 @@ class HandleStartGameAction(InputAction):
             and self._physics_service.check_collision_point(start_button, mouse_pos):
                 actors.remove_actor("start_button", start_button)
                 actions.remove_action("input", self)
-                self._audio_service.play_sound("asteroid/assets/sound/laugh.mp3", 1)
+                self._audio_service.play_sound("zombie_run/assets/sound/laugh.mp3", 1)
                 for action in self._actions["input"]:
                     actions.add_action("input", action)
                 for action in self._actions["update"]:

@@ -88,11 +88,13 @@ class SpawnMonstersAction(UpdateAction):
             - Add the astroid to the cast
             - Record the most recent spawn
         """
+        player = actors.get_first_actor("player")
         if not self._timer_started:
             self._timer_started = True
             self._last_spawn = time.time()
+
         
-        if time.time() - self._last_spawn >= SPAWN_INTERVAL:
+        if time.time() - self._last_spawn >= SPAWN_INTERVAL and player != None:
             # Pick a random type of astroid: Small, Medium, Large
             monster_type = random.randint(1,3)
 

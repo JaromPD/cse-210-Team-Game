@@ -7,6 +7,9 @@ class HandlePlayerMonstersCollision(UpdateAction):
         self._score = None
         self._physics_service = physics_service
         self._audio_service = audio_service
+        self._death_paths = []
+        for i in range(9):
+            self._death_paths.append(f"zombie_run/assets/zombie/dead/__Zombie01_Dead_00{i}.png")
 
     def execute(self, actors, actions, clock, callback):
         """
@@ -26,6 +29,7 @@ class HandlePlayerMonstersCollision(UpdateAction):
                         pass
                     elif len(hearts) == 1:
                         self._score.penalize(100)
+                        self._player.set_paths(self._death_paths)
                         actors.remove_actor("player", self._player)
                         actors.remove_actor("hearts", heart)
                         self._audio_service.play_sound("zombie_run/assets/sound/squish.wav", 1)

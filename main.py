@@ -16,6 +16,7 @@ from zombie_run.cast.background import Background
 from zombie_run.cast.playerScore import PlayerScore
 from zombie_run.cast.ship import Ship
 from zombie_run.cast.floor import Floor
+from zombie_run.script.DrawGameOverAction import DrawGameOverAction
 from zombie_run.script.PlayBackgroundMusicAction import PlayBackgroundMusicAction
 from zombie_run.script.DrawScoreAction import DrawScoreAction
 from zombie_run.script.HandlePlayerHittingFloorAction import HandlePlayerHittingFloorAction
@@ -156,6 +157,7 @@ def main():
     script.add_action("output", PlayBackgroundMusicAction(1, "zombie_run/assets/sound/background_music.mp3", audio_service))
     script.add_action("output", DrawActorsAction(1, screen_service))
     script.add_action("output", DrawScoreAction(1, screen_service))
+    script.add_action("output", DrawGameOverAction(1, screen_service))
     script.add_action("output", UpdateScreenAction(2, screen_service))
 
 
