@@ -45,7 +45,7 @@ class HandlePlayerMovementAction(InputAction):
                     self._player.set_vy(-8)
                 elif self._jump_timer < 40 and self._jump_timer >= 20:
                     self._jump_timer += 1
-                    self._player.set_vy(8)
+                    self._player.set_vy(-5)
                 
             if not keys_state[keys.UP]:
                 if self._player.get_y() < 400:
