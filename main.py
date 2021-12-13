@@ -1,4 +1,4 @@
-from asteroid.script.HandleShipAstroidsCollison import HandleShipAstroidsCollision
+from zombie_run.script.HandlePlayerMonstersCollison import HandlePlayerMonstersCollision
 from genie.director import Director
 from genie.cast.cast import Cast
 from genie.script.script import Script
@@ -8,25 +8,25 @@ from genie.cast.animatedActor import AnimatedActor
 from genie.cast.actor import Actor
 from genie.script.action import Action
 
-from asteroid.script.HandleOffscreenAction import HandleOffscreenAction
-from asteroid.script.HandleStartGameAction import HandleStartGameAction
+from zombie_run.script.HandleOffscreenAction import HandleOffscreenAction
+from zombie_run.script.HandleStartGameAction import HandleStartGameAction
 
-from asteroid.cast.hearts import Heart
-from asteroid.cast.background import Background
-from asteroid.cast.playerScore import PlayerScore
-from asteroid.cast.ship import Ship
-from asteroid.cast.floor import Floor
-from asteroid.script.PlayBackgroundMusicAction import PlayBackgroundMusicAction
-from asteroid.script.DrawScoreAction import DrawScoreAction
-from asteroid.script.HandleShipHittingFloorAction import HandleShipHittingFloorAction
-from asteroid.cast.startGameButton import StartGameButton
-from asteroid.script.HandleQuitAction import HandleQuitAction
-from asteroid.script.HandleShipMovementAction import HandleShipMovementAction
-from asteroid.script.MoveActorsAction import MoveActorsAction
-from asteroid.script.HandlePointAccumulation import HandlePointAccumulation
-from asteroid.script.SpawnAstroidsAction import SpawnAstroidsAction
-from asteroid.script.DrawActorsAction import DrawActorsAction
-from asteroid.script.UpdateScreenAction import UpdateScreenAction
+from zombie_run.cast.hearts import Heart
+from zombie_run.cast.background import Background
+from zombie_run.cast.playerScore import PlayerScore
+from zombie_run.cast.ship import Ship
+from zombie_run.cast.floor import Floor
+from zombie_run.script.PlayBackgroundMusicAction import PlayBackgroundMusicAction
+from zombie_run.script.DrawScoreAction import DrawScoreAction
+from zombie_run.script.HandlePlayerHittingFloorAction import HandlePlayerHittingFloorAction
+from zombie_run.cast.startGameButton import StartGameButton
+from zombie_run.script.HandleQuitAction import HandleQuitAction
+from zombie_run.script.HandlePlayerMovementAction import HandlePlayerMovementAction
+from zombie_run.script.MoveActorsAction import MoveActorsAction
+from zombie_run.script.HandlePointAccumulation import HandlePointAccumulation
+from zombie_run.script.SpawnMonstersAction import SpawnMonstersAction
+from zombie_run.script.DrawActorsAction import DrawActorsAction
+from zombie_run.script.UpdateScreenAction import UpdateScreenAction
 
 
 W_SIZE = (1000, 500)
@@ -76,11 +76,11 @@ def main():
     player_walk = []
     for i in range(11):
         if i < 10:
-            player_walk.append(f"asteroid/assets/zombie/walk/__Zombie01_Walk_00{i}.png")
+            player_walk.append(f"zombie_run/assets/zombie/walk/__Zombie01_Walk_00{i}.png")
         else:
-            player_walk.append(f"asteroid/assets/zombie/walk/__Zombie01_Walk_0{i}.png")
+            player_walk.append(f"zombie_run/assets/zombie/walk/__Zombie01_Walk_0{i}.png")
 
-    ship = AnimatedActor(player_walk,
+    player = AnimatedActor(player_walk,
                             width =70, 
                             height=85,
                             animation_fps=11,
@@ -92,7 +92,7 @@ def main():
                             )
 
     # Start game button
-    start_button = StartGameButton(path="asteroid/assets/others/start_button2.png",
+    start_button = StartGameButton(path="zombie_run/assets/others/start_button2.png",
                                     width = 305,
                                     height = 113,
                                     x = W_SIZE[0]/2,
@@ -108,7 +108,7 @@ def main():
     # Create the score
     score = PlayerScore(path="", score=0 )
 
-    background_image = Background("asteroid/assets/3_game_background.png", 
+    background_image = Background("zombie_run/assets/3_game_background.png", 
                                     width=W_SIZE[0],
                                     height=W_SIZE[1],
                                     x = W_SIZE[0]/2,
@@ -116,14 +116,14 @@ def main():
 
     # Give actor(s) to the cast
     cast.add_actor("background_image", background_image)
-    cast.add_actor("ship", ship)
+    cast.add_actor("player", player)
     cast.add_actor("score", score)
     cast.add_actor("start_button", start_button)
     cast.add_actor("floor", floor)
         # Create the hearts
     heart_x = 700
     for _ in range(INITIAL_NUM_LIVES):
-        heart = Heart(path="asteroid/assets/tombstone.png", 
+        heart = Heart(path="zombie_run/assets/tombstone.png", 
                         width = 100,
                         height = 100,
                         x = heart_x,
@@ -140,20 +140,20 @@ def main():
 
     # Add actions that must be added to the script when the game starts
     startgame_actions = {"input" : [], "update" : [], "output": []}
-    startgame_actions["input"].append(HandleShipMovementAction(2, keyboard_service))
-    startgame_actions["update"].append(SpawnAstroidsAction(1, W_SIZE))
+    startgame_actions["input"].append(HandlePlayerMovementAction(2, keyboard_service))
+    startgame_actions["update"].append(SpawnMonstersAction(1, W_SIZE))
     startgame_actions["update"].append(HandlePointAccumulation(1, W_SIZE))
     script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions, audio_service))
 
     # Create update actions
-    script.add_action("update", HandleShipHittingFloorAction(1, W_SIZE))
+    script.add_action("update", HandlePlayerHittingFloorAction(1, W_SIZE))
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
-    script.add_action("update", HandleShipAstroidsCollision(1, physics_service, audio_service))
+    script.add_action("update", HandlePlayerMonstersCollision(1, physics_service, audio_service))
     #script.add_action("update", HandlePointAccumulation(1,W_SIZE))
 
     # Create output actions
-    script.add_action("output", PlayBackgroundMusicAction(1, "asteroid/assets/sound/background_music.mp3", audio_service))
+    script.add_action("output", PlayBackgroundMusicAction(1, "zombie_run/assets/sound/background_music.mp3", audio_service))
     script.add_action("output", DrawActorsAction(1, screen_service))
     script.add_action("output", DrawScoreAction(1, screen_service))
     script.add_action("output", UpdateScreenAction(2, screen_service))

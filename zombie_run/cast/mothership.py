@@ -1,4 +1,4 @@
-from asteroid.cast.HasLifeActor import HasLifeActor
+from zombie_run.cast.HasLifeActor import HasLifeActor
 
 class MotherShip(HasLifeActor):
     def __init__(self, path: str,

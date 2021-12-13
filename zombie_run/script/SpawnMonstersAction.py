@@ -1,5 +1,5 @@
 from genie.script.action import UpdateAction
-from asteroid.cast.astroid import Astroid
+from zombie_run.cast.astroid import Astroid
 from genie.cast.animatedActor import AnimatedActor
 
 import random
@@ -14,7 +14,7 @@ LARGE = 1
 MEDIUM = 2
 SMALL = 3
 
-class SpawnAstroidsAction(UpdateAction):
+class SpawnMonstersAction(UpdateAction):
     def __init__(self, priority, window_size):
         super().__init__(priority)
         self._timer_started = False
@@ -23,15 +23,15 @@ class SpawnAstroidsAction(UpdateAction):
         self._astroid_spawn = False
         self._small_paths = []
         for i in range(7):
-            self._small_paths.append(f"asteroid/assets/goblin/walk/__Goblin01_Walk_00{i}.png")
+            self._small_paths.append(f"zombie_run/assets/goblin/walk/__Goblin01_Walk_00{i}.png")
         self._bats_path = []
         for i in range(7):
-            self._bats_path.append(f"asteroid/assets/bats/flying/__Bat01_Fly_00{i}.png")
+            self._bats_path.append(f"zombie_run/assets/bats/flying/__Bat01_Fly_00{i}.png")
         self._reaper_path = []
         for i in range(7):
-            self._reaper_path.append(f"asteroid/assets/Reaper/attack/__Grim_Attack_00{i}.png")
+            self._reaper_path.append(f"zombie_run/assets/Reaper/attack/__Grim_Attack_00{i}.png")
 
-    def _create_astroid(self, type: int, x: int, y:int):
+    def _create_monster(self, type: int, x: int, y:int):
         """
             This is a helper function that creates an astroid based on
             the input "type" and the initial position
@@ -94,17 +94,17 @@ class SpawnAstroidsAction(UpdateAction):
         
         if time.time() - self._last_spawn >= SPAWN_INTERVAL:
             # Pick a random type of astroid: Small, Medium, Large
-            astroid_type = random.randint(1,3)
+            monster_type = random.randint(1,3)
 
             # Generate a random position on top of the screen,
             #  limit the spawn range from 1/8 of the screen to 7/8 of the screen
             lower_x_bound = int(self._window_size[0] / 8)
             upper_x_bound = int(self._window_size[0] - lower_x_bound)
 
-            if astroid_type == 3:
+            if monster_type == 3:
                 start_pos_x = 990
                 start_pos_y = 415
-            elif astroid_type == 2:
+            elif monster_type == 2:
                 start_pos_x = 990
                 start_pos_y = 200
             else:
@@ -113,9 +113,9 @@ class SpawnAstroidsAction(UpdateAction):
 
 
             # spawn an astroid
-            astroid = self._create_astroid(astroid_type, start_pos_x, start_pos_y)
+            monster = self._create_monster(monster_type, start_pos_x, start_pos_y)
             #astroid.set_animating(True)
-            actors.add_actor("astroids", astroid)
+            actors.add_actor("monsters", monster)
 
             # set last_spawn to current frame
             self._last_spawn = time.time()
