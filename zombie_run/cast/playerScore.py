@@ -40,5 +40,11 @@ class PlayerScore(Actor):
     def add_score(self, points):
         self._score += points
     
+    def mult_score(self,points):
+        self._score *= points
+
+    def div_score(self,points):
+        self._score //= points
+
     def penalize(self, points):
         self._score -= points

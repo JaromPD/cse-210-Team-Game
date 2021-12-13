@@ -15,21 +15,21 @@ class HandlePlayerMonstersCollision(UpdateAction):
         """
             This action handles all collisions between the SHIP and the ASTROIDS
         """
-        # First look for the ship
+        # First look for the player
         self._player = actors.get_first_actor("player")
         heart = actors.get_first_actor("hearts")
         hearts = actors.get_actors("hearts")
         self._score = actors.get_first_actor("score")
-        # Only worry about collision if the ship actually exists
+        # Only worry about collision if the player actually exists
         if self._player != None:
-            # Look through all the astroids, see if any collides with ship
+            # Look through all the monsters, see if any collides with ship
             for actor in actors.get_actors("monsters"):
                 if self._physics_service.check_collision(self._player, actor):
                     if heart == None:
                         pass
                     elif len(hearts) == 1:
                         self._score.penalize(100)
-                        self._player.set_paths(self._death_paths)
+                        #self._player.set_paths(self._death_paths)
                         actors.remove_actor("player", self._player)
                         actors.remove_actor("hearts", heart)
                         self._audio_service.play_sound("zombie_run/assets/sound/squish.wav", 1)

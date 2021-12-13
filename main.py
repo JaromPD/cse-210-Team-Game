@@ -16,6 +16,8 @@ from zombie_run.cast.background import Background
 from zombie_run.cast.playerScore import PlayerScore
 from zombie_run.cast.ship import Ship
 from zombie_run.cast.floor import Floor
+from zombie_run.script.HandlePlayerPowerUpCollision import HandlePlayerPowerUpCollision
+from zombie_run.script.SpawnPowerUpsAction import SpawnPowerUpsAction
 from zombie_run.script.DrawGameOverAction import DrawGameOverAction
 from zombie_run.script.PlayBackgroundMusicAction import PlayBackgroundMusicAction
 from zombie_run.script.DrawScoreAction import DrawScoreAction
@@ -143,6 +145,7 @@ def main():
     startgame_actions = {"input" : [], "update" : [], "output": []}
     startgame_actions["input"].append(HandlePlayerMovementAction(2, keyboard_service))
     startgame_actions["update"].append(SpawnMonstersAction(1, W_SIZE))
+    startgame_actions["update"].append(SpawnPowerUpsAction(1, W_SIZE))
     startgame_actions["update"].append(HandlePointAccumulation(1, W_SIZE))
     script.add_action("input", HandleStartGameAction(2, mouse_service, physics_service, startgame_actions, audio_service))
 
@@ -151,6 +154,7 @@ def main():
     script.add_action("update", MoveActorsAction(1, physics_service))
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
     script.add_action("update", HandlePlayerMonstersCollision(1, physics_service, audio_service))
+    script.add_action("update", HandlePlayerPowerUpCollision(1, physics_service, audio_service))
     #script.add_action("update", HandlePointAccumulation(1,W_SIZE))
 
     # Create output actions
