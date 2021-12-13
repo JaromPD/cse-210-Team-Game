@@ -16,6 +16,7 @@ from zombie_run.cast.background import Background
 from zombie_run.cast.playerScore import PlayerScore
 from zombie_run.cast.ship import Ship
 from zombie_run.cast.floor import Floor
+from zombie_run.script.HandleBackgroundChangeAction import HandleBackgroundChange
 from zombie_run.script.HandlePlayerPowerUpCollision import HandlePlayerPowerUpCollision
 from zombie_run.script.SpawnPowerUpsAction import SpawnPowerUpsAction
 from zombie_run.script.DrawGameOverAction import DrawGameOverAction
@@ -36,7 +37,7 @@ W_SIZE = (1000, 500)
 START_POSITION = 200, 250
 SHIP_WIDTH = 40
 SHIP_LENGTH = 55
-SCREEN_TITLE = "Zombie Run"
+SCREEN_TITLE = "Zombie Jump!"
 FPS = 120
 INITIAL_NUM_LIVES = 3
 
@@ -155,6 +156,7 @@ def main():
     script.add_action("update", HandleOffscreenAction(2, W_SIZE))
     script.add_action("update", HandlePlayerMonstersCollision(1, physics_service, audio_service))
     script.add_action("update", HandlePlayerPowerUpCollision(1, physics_service, audio_service))
+    script.add_action("update",HandleBackgroundChange(1, W_SIZE))
     #script.add_action("update", HandlePointAccumulation(1,W_SIZE))
 
     # Create output actions
